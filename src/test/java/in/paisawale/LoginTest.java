@@ -54,11 +54,11 @@ public class LoginTest {
         }
     }
 
-    @AfterTest
+   /* @AfterTest
     public void terminateWindow() {
 
         driver.close();
-    }
+    } */
 
 
 
