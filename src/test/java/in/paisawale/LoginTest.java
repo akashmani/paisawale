@@ -56,6 +56,7 @@ public class LoginTest {
 
     @AfterTest
     public void terminateWindow() {
+
         driver.close();
     }
 
