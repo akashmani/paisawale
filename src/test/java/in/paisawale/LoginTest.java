@@ -39,7 +39,7 @@ public class LoginTest {
 
 
 
-  /*  @Test(priority = 2)
+    @Test(priority = 2)
     public void testValidLogin() {
         driver.findElement(By.id("email")).sendKeys("a@aw.com");
         driver.findElement(By.id("pass")).sendKeys("123");
@@ -52,7 +52,7 @@ public class LoginTest {
         else {
             System.out.println("Wrong login");
         }
-    }*/
+    }
 
     @AfterTest
     public void terminateWindow() {
