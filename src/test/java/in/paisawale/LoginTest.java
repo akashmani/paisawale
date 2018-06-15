@@ -4,61 +4,57 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
     WebDriver driver;
 
-    @BeforeTest
+    @BeforeMethod
     public void launchBrowser() {
-        System.setProperty("webdriver.chrome.driver","F:\\software\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","F:\\software\\chrome driver setup\\chromedriver_win32 (2)\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://www.facebook.com/");
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
 
 
-    @Test
+   @Test(priority =1)
     public void testInvalidPassword(){
-        driver.findElement(By.id("email")).sendKeys("a@aw.com");
+        driver.findElement(By.id("email")).sendKeys("aw@gmail.com");
         driver.findElement(By.id("pass")).sendKeys("12345");
         driver.findElement(By.id("u_0_2")).click();
-        WebElement LogIn = driver.findElement(By.className("Log in to Facebook"));
+        WebElement LogIn = driver.findElement(By.name("login"));
         String text = LogIn.getText();
-        if(text.equals("Log in to Facebook"))
-        {
+        Assert.assertEquals(text,"Log In");
+       // if(text.contains("The password that you've entered is incorrect."))
+
             System.out.println("Invalid username or password");
-        }
-        else {
-            System.out.println("Correct login");
-        }
     }
 
 
 
-    @Test(priority = 2)
+    @Test(priority = 1)
     public void testValidLogin() {
         driver.findElement(By.id("email")).sendKeys("a@aw.com");
-        driver.findElement(By.id("pass")).sendKeys("123");
+        driver.findElement(By.id("pass")).sendKeys("54321");
         driver.findElement(By.id("u_0_2")).click();
-        WebElement SuccessfullLogin = driver.findElement(By.className("Akash"));
+        WebElement SuccessfullLogin = driver.findElement(By.id("userNav"));
         String text = SuccessfullLogin.getText();
-        if (text.equals("Akash")) {
-            System.out.println("successfull login");
-        }
-        else {
-            System.out.println("Wrong login");
-        }
+        Assert.assertEquals(text,"Akash Mani");
+        System.out.println("successfull login");
+
     }
 
-   /* @AfterTest
+   @AfterMethod
     public void terminateWindow() {
 
-        driver.close();
-    } */
+       driver.close();
+    }
 
 
 
