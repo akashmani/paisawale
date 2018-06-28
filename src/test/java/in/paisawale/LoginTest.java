@@ -18,8 +18,11 @@ public class LoginTest {
         driver = new ChromeDriver();
         driver.get("https://www.facebook.com/");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        //driver.manage().deleteAllCookies();
+        driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
     }
+
 
 
 
@@ -39,14 +42,21 @@ public class LoginTest {
 
 
     @Test(priority = 1)
-    public void testValidLogin() {
-        driver.findElement(By.id("email")).sendKeys("a@aw.com");
-        driver.findElement(By.id("pass")).sendKeys("54321");
+    public void testValidLogin() throws InterruptedException {
+        driver.findElement(By.id("email")).sendKeys("manu.ambitious22@gmail.com");
+        driver.findElement(By.id("pass")).sendKeys("aka-man-muk3288");
+       // Thread.sleep(5000);
         driver.findElement(By.id("u_0_2")).click();
         WebElement SuccessfullLogin = driver.findElement(By.id("userNav"));
         String text = SuccessfullLogin.getText();
         Assert.assertEquals(text,"Akash Mani");
         System.out.println("successfull login");
+        Thread.sleep(5000);
+        WebElement logOut = driver.findElement(By.id("userNavigationLabel"));
+        logOut.click();
+        Thread.sleep(5000);
+        WebElement signOut = driver.findElement(By.id("u_c_5"));
+        signOut.click();
 
     }
 
